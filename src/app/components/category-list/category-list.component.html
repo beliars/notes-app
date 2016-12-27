@@ -1,0 +1,5 @@
+<li>{{ $ctrl.category.name }}
+    <ul ng-if="$ctrl.category.children">
+        <category-item ng-repeat="item in $ctrl.category.children" detail=item></category-item>
+    </ul>
+</li>

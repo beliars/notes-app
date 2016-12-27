@@ -1,0 +1,27 @@
+notes-app {
+
+    .content-wrap {
+
+        min-height: calc(100vh - 50px);
+
+        .navbar-header {
+
+            .navbar-brand {
+                font-size: 20px;
+            }
+        }
+    }
+
+    footer {
+        height: 50px;
+        background-color: #374147;
+
+        p {
+            margin: 0;
+            line-height: 50px;
+            color: #fff;
+            float: right;
+            margin-right: 50px;
+        }
+    }
+}
