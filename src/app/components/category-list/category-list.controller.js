@@ -6,6 +6,5 @@ export default class CategoryListController {
     }
 
     $onInit() {
-        console.log(this.category);
     }
 }

@@ -1,50 +1,20 @@
-export default class CategiriesController {
+import { CategoriesService } from '../../services/categories.service';
 
-    constructor($state) {
+export default class CategoriesController {
+
+    constructor($state, $scope, CategoriesService) {
         "ngInject";
         this.$state = $state;
-        this.categories = [
-            {
-                "id": 1,
-                "name": "Cat 1",
-                "children": [
-                    {
-                        "id": 2,
-                        "name": "SubCat 1",
-                        "children": []
-                    },
-                    {
-                        "id": 3,
-                        "name": "SubCat 2",
-                        "children": []
-                    },
-                    {
-                        "id": 4,
-                        "name": "SubCat 3",
-                        "children": []
-                    },
-                    {
-                        "id": 5,
-                        "name": "SubCat 4",
-                        "children": [
-                            {
-                                "id": 6,
-                                "name": "SubCat 1",
-                                "children": []
-                            },
-                            {
-                                "id": 7,
-                                "name": "SubCat 2",
-                                "children": []
-                            }
-                        ]
-                    }
-                ]
-            }
-        ]
+        this.$scope = $scope;
+        this.categoriesService = CategoriesService;
     }
 
     $onInit() {
+        this.categories = this.categoriesService.getCategories();
+        console.log(this.categories);
 
+        this.$scope.$on('updateCategoriesEvent', (event, data) => {
+            this.categories = data;
+        });
     }
 }

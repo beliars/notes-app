@@ -3,8 +3,11 @@
     <category-form></category-form>
     <div class="row">
         <div class="categories-list">
-            <ul>
-                <category-list ng-repeat="category in $ctrl.categories" category="category"></category-list>
+            <ul class="cat-list">
+                <li ng-repeat="category in $ctrl.categories">
+                    {{ category.name }}
+                    <category-list category="category"></category-list>
+                </li>
             </ul>
         </div>
     </div>

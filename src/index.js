@@ -1,6 +1,6 @@
 import angular from 'angular';
 
-// import { CategoryService } from './app/services/category.service';
+import { CategoriesService } from './app/services/categories.service';
 import { AppComponent } from './app/components/app.component';
 import { CategoriesComponent } from './app/components/categories/categories.component';
 import { CategoryListComponent } from './app/components/category-list/category-list.component';
@@ -13,11 +13,12 @@ import './index.scss';
 import $ from 'jquery';
 import "../node_modules/bootstrap-sass/assets/javascripts/bootstrap.js";
 import _ from 'lodash';
+import deepMapValues from 'lodash-deep';
 import 'angular-ui-router';
 
 angular
   .module('notes-app', ['ui.router'])
-  // .service('CategoryService', CategoryService)
+  .service('CategoriesService', CategoriesService)
   .component('notesApp', AppComponent)
   .component('categories', CategoriesComponent)
   .component('categoryList', CategoryListComponent)

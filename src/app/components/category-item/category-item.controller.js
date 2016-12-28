@@ -6,6 +6,5 @@ export default class CategoryItemController {
     }
 
     $onInit() {
-        console.log(this.detail.children);
     }
 }
