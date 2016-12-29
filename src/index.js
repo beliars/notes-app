@@ -13,7 +13,6 @@ import './index.scss';
 import $ from 'jquery';
 import "../node_modules/bootstrap-sass/assets/javascripts/bootstrap.js";
 import _ from 'lodash';
-import deepMapValues from 'lodash-deep';
 import 'angular-ui-router';
 
 angular
