@@ -11,8 +11,6 @@ export default class CategoriesController {
 
     $onInit() {
         this.categories = this.categoriesService.getCategories();
-        console.log(this.categories);
-
         this.$scope.$on('updateCategoriesEvent', (event, data) => {
             this.categories = data;
         });

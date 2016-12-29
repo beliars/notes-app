@@ -41,7 +41,7 @@ export default class CategoryFormController {
 
     onSubmitCat(form) {
         if(form.$valid) {
-            this.mainCategory.id = this.getMaxId(this.categories) + 1;
+            this.mainCategory.id = this.getId(this.categories, []) + 1;
             this.categories.push(this.mainCategory);
             this.mainCategory = {
                 id: null,
@@ -54,7 +54,7 @@ export default class CategoryFormController {
 
     onSubmitSubcat(form) {
         if(form.$valid) {
-            this.subCategory.id = this.getMaxId(this.categories) + 1;
+            this.subCategory.id = this.getId(this.categories, []) + 1;
             this.addSubCat(this.categories, this.subCategory, this.chosenOptionId);
             this.subCategory = {
                 id: null,
@@ -69,16 +69,8 @@ export default class CategoryFormController {
         this.categoriesService.addObj(arr, obj, id);
     }
 
-    getMaxId(arr) {
-        arr.forEach(item => {
-            this.idArr.push(item.id);
-            if(item.children.length > 0) {
-                this.getMaxId(item.children);
-            }
-        })
-        let maxId = _.max(this.idArr);
-        if(isNaN(maxId)) maxId = 0;
-        return maxId;
+    getId(arr, max) {
+        return this.categoriesService.getMaxId(arr, max);
     }
 
     toogleSubCatForm() {

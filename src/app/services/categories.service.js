@@ -72,4 +72,17 @@ export class CategoriesService {
             }
         });
     }
+
+    getMaxId(arr, max) {
+        arr.forEach(item => {
+            max.push(item.id);
+            if(item.children.length > 0) {
+                this.getMaxId(item.children, max);
+            }
+        });
+        let maxId = _.max(max);
+        if(isNaN(maxId)) maxId = 0;
+        return maxId;
+    }
+
 }
