@@ -1,10 +1,12 @@
 <div class="container">
+    <h3 ng-if="$ctrl.categories.length == 0">There are no categories, please add at least one category.</h3>
     <category-form></category-form>
     <div class="row">
-        <div class="categories-list">
+        <div class="categories-list col-xs-12">
+            <h3 ng-if="$ctrl.categories.length > 0">Categories</h3>
             <ul class="cat-list">
-                <li ng-repeat="category in $ctrl.categories">
-                    {{ category.name }}
+                <li id="{{ category.id }}" ng-repeat="category in $ctrl.categories">
+                    {{ category.name }} <i ng-click="$ctrl.deleteCat($event)" class="fa fa-minus" aria-hidden="true" title="Delete"></i>
                     <category-list category="category"></category-list>
                 </li>
             </ul>

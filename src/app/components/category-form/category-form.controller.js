@@ -19,13 +19,15 @@ export default class CategoryFormController {
         this.options = [];
         this.chosenOptionId = null;
         this.idArr = [];
+        this.showSubCatform = false;
     }
 
-    $onInit() {
+    $onChanges() {
         this.categories = this.categoriesService.getCategories();
         this.getOptions(this.categories);
         this.$scope.$on('updateCategoriesEvent', (event, data) => {
             this.categories = data;
+            this.options = [];
             this.getOptions(this.categories);
         });
     }
@@ -41,7 +43,6 @@ export default class CategoryFormController {
         if(form.$valid) {
             this.mainCategory.id = this.getMaxId(this.categories) + 1;
             this.categories.push(this.mainCategory);
-            console.log(this.categories);
             this.mainCategory = {
                 id: null,
                 name: '',
@@ -54,8 +55,7 @@ export default class CategoryFormController {
     onSubmitSubcat(form) {
         if(form.$valid) {
             this.subCategory.id = this.getMaxId(this.categories) + 1;
-            this.addObj(this.categories, this.subCategory, this.chosenOptionId);
-            console.log(this.categories);
+            this.addSubCat(this.categories, this.subCategory, this.chosenOptionId);
             this.subCategory = {
                 id: null,
                 name: '',
@@ -65,15 +65,8 @@ export default class CategoryFormController {
         }
     }
 
-    addObj(arr, obj, id) {
-        arr.forEach(item => {
-            if(item.id == id) {
-                item.children.push(obj);
-            }
-            else if(item.children.length > 0) {
-                this.addObj(item.children, obj, id);
-            }
-        })
+    addSubCat(arr, obj, id) {
+        this.categoriesService.addObj(arr, obj, id);
     }
 
     getMaxId(arr) {
@@ -83,6 +76,12 @@ export default class CategoryFormController {
                 this.getMaxId(item.children);
             }
         })
-        return _.max(this.idArr);
+        let maxId = _.max(this.idArr);
+        if(isNaN(maxId)) maxId = 0;
+        return maxId;
+    }
+
+    toogleSubCatForm() {
+        this.showSubCatform = !this.showSubCatform;
     }
 }

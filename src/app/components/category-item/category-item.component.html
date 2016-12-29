@@ -1,2 +1,2 @@
-<li>{{$ctrl.detail.name}}</li>
+<li id="{{ $ctrl.detail.id }}">{{$ctrl.detail.name}} <i ng-click="$ctrl.deleteCat($event)" class="fa fa-minus" aria-hidden="true" title="Delete"></i></li>
 <category-list ng-if="$ctrl.detail.children.length > 0" category="$ctrl.detail"></category-list>

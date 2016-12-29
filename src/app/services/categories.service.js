@@ -34,12 +34,16 @@ export class CategoriesService {
         ];
 
 
-        localStorage.setItem('notesAppCategories', JSON.stringify(this.mockCategories));
+        // localStorage.setItem('notesAppCategories', JSON.stringify(this.mockCategories));
 
     }
 
     getCategories() {
-        return this.categories = JSON.parse(localStorage.getItem('notesAppCategories'));
+        this.categories = JSON.parse(localStorage.getItem('notesAppCategories'));
+        if (this.categories == null) {
+            return this.categories = [];
+        }
+        else return this.categories;
     }
 
     saveCategories(categories) {
@@ -47,4 +51,25 @@ export class CategoriesService {
         this.$rootScope.$broadcast('updateCategoriesEvent', this.categories);
     }
 
+    addObj(arr, obj, id) {
+        arr.forEach(item => {
+            if(item.id == id) {
+                item.children.push(obj);
+            }
+            else if(item.children.length > 0) {
+                this.addObj(item.children, obj, id);
+            }
+        });
+    }
+
+    deleteObj(arr, id) {
+        arr.forEach((item, i) => {
+            if(item.id == id) {
+                arr.splice(i, 1)
+            }
+            else if(item.children.length > 0) {
+                this.deleteObj(item.children, id);
+            }
+        });
+    }
 }

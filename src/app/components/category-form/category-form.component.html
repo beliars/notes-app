@@ -1,29 +1,33 @@
-<div class="form-wrapper">
-    <h2>Add category</h2>
-    <form name="categoryForm" ng-submit="$ctrl.onSubmitCat(categoryForm)">
-        <div class="form-group">
-            <label for="mainCategory">Enter category name</label>
-            <input type="text" id="mainCategory" name="category" class="form-control" placeholder="Category name" ng-model="$ctrl.mainCategory.name" required>
-        </div>
-        <button type="submit" class="btn btn-default">Add category</button>
-    </form>
-</div>
-
-<div class="form-wrapper">
-    <h2>Add subcategory</h2>
-    <form name="subcategoryForm" ng-submit="$ctrl.onSubmitSubcat(subcategoryForm)">
-        <div class="row">
-            <div class="form-group col-xs-8">
-                <label for="subCategory">Enter subcategory name</label>
-                <input type="text" id="subCategory" name="subcategory" class="form-control" placeholder="Subcategory name" ng-model="$ctrl.subCategory.name" required>
+<div class="row">
+    <div class="form-wrapper col-xs-12">
+        <h2>Add category</h2>
+        <form name="categoryForm" ng-submit="$ctrl.onSubmitCat(categoryForm)">
+            <div class="form-group">
+                <label for="mainCategory">Enter category name</label>
+                <input type="text" id="mainCategory" name="category" class="form-control" placeholder="Category name" ng-model="$ctrl.mainCategory.name" required>
             </div>
-            <div class="form-group col-xs-4">
-                <label for="selectCat">Choose parent category</label>
-                <select id="selectCat" class="form-control" ng-model="$ctrl.chosenOptionId" required>
-                    <option ng-repeat="option in $ctrl.options" value="{{ option.id }}">{{ option.name }}</option>
-                </select>
-            </div>
+            <button type="submit" class="btn btn-default">Add category</button>
+        </form>
+    </div>
+    <div class="form-wrapper col-xs-9 col-xs-push-1" ng-if="$ctrl.categories.length > 0">
+        <button class="btn btn-default" ng-click="$ctrl.toogleSubCatForm()">Show/hide subcategory form</button>
+        <div ng-if="$ctrl.showSubCatform">
+            <h3>Add subcategory</h3>
+            <form name="subcategoryForm" ng-submit="$ctrl.onSubmitSubcat(subcategoryForm)">
+                <div class="row">
+                    <div class="form-group col-xs-8">
+                        <label for="subCategory">Enter subcategory name</label>
+                        <input type="text" id="subCategory" name="subcategory" class="form-control" placeholder="Subcategory name" ng-model="$ctrl.subCategory.name" required>
+                    </div>
+                    <div class="form-group col-xs-4">
+                        <label for="selectCat">Choose parent category</label>
+                        <select id="selectCat" class="form-control" ng-model="$ctrl.chosenOptionId" required>
+                            <option ng-repeat="option in $ctrl.options" value="{{ option.id }}">{{ option.name }}</option>
+                        </select>
+                    </div>
+                </div>
+                <button type="submit" class="btn btn-default">Add subcategory</button>
+            </form>
         </div>
-        <button type="submit" class="btn btn-default">Add subcategory</button>
-    </form>
+    </div>
 </div>

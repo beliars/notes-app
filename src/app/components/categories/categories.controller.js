@@ -17,4 +17,11 @@ export default class CategoriesController {
             this.categories = data;
         });
     }
+
+    deleteCat(event) {
+        let id = event.target.parentElement.id;
+        this.categories = this.categoriesService.getCategories();
+        this.categoriesService.deleteObj(this.categories, id);
+        this.categoriesService.saveCategories(this.categories);
+    }
 }
