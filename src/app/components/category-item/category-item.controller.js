@@ -12,8 +12,8 @@ export default class CategoryItemController {
 
     }
 
-    deleteCat(event) {
-        let id = event.target.parentElement.id;
+    deleteCat(detail) {
+        let id = detail.id;
         this.categories = this.categoriesService.getCategories();
         this.categoriesService.deleteObj(this.categories, id);
         this.categoriesService.saveCategories(this.categories);

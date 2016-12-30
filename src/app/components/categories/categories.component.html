@@ -6,7 +6,7 @@
             <h3 ng-if="$ctrl.categories.length > 0">Categories</h3>
             <ul class="cat-list">
                 <li id="{{ category.id }}" ng-repeat="category in $ctrl.categories">
-                    {{ category.name }} <i ng-click="$ctrl.deleteCat($event)" class="fa fa-minus" aria-hidden="true" title="Delete"></i>
+                    {{ category.name }} <i ng-click="$ctrl.deleteCat(category)" class="fa fa-minus" aria-hidden="true" title="Delete"></i>
                     <category-list category="category"></category-list>
                 </li>
             </ul>
