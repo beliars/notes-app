@@ -6,10 +6,13 @@
             <h3 ng-if="$ctrl.categories.length > 0">Categories</h3>
             <ul class="cat-list">
                 <li id="{{ category.id }}" ng-repeat="category in $ctrl.categories">
-                    {{ category.name }} <i ng-click="$ctrl.deleteCat(category)" class="fa fa-minus" aria-hidden="true" title="Delete"></i>
+                    {{ category.name }}
+                    <i class="fa fa-plus" aria-hidden="true" title="Add" ng-if="$ctrl.pendingAdd" ng-click="$ctrl.addCat(category)"></i>
+                    <i class="fa fa-minus" aria-hidden="true" title="Delete" ng-if="$ctrl.pendingDel" ng-click="$ctrl.deleteCat(category)"></i>
                     <category-list category="category"></category-list>
                 </li>
             </ul>
+            <button class="btn btn-default delete" ng-click="$ctrl.pendingDelete()">Delete category</button>
         </div>
     </div>
 </div>

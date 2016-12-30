@@ -33,6 +33,14 @@ export class CategoriesService {
             }
         ];
 
+        this.newCategory = {
+            id: null,
+            name: '',
+            children: []
+        }
+
+        this.chosenId = 0;
+
 
         // localStorage.setItem('notesAppCategories', JSON.stringify(this.mockCategories));
 
@@ -83,6 +91,30 @@ export class CategoriesService {
         let maxId = _.max(max);
         if(isNaN(maxId)) maxId = 0;
         return maxId;
+    }
+
+    addNewCategoryToRoot() {
+        this.getCategories();
+        this.newCategory.id = this.getMaxId(this.categories, []) + 1;
+        this.categories.push(this.newCategory);
+        this.saveCategories(this.categories);
+        this.newCategory = {
+            id: null,
+            name: '',
+            children: []
+        }
+    }
+
+    addNewCategory() {
+        this.getCategories();
+        this.newCategory.id = this.getMaxId(this.categories, []) + 1;
+        this.addObj(this.categories, this.newCategory, this.chosenId);
+        this.saveCategories(this.categories);
+        this.newCategory = {
+            id: null,
+            name: '',
+            children: []
+        }
     }
 
 }

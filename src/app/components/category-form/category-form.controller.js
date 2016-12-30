@@ -2,78 +2,61 @@ import { CategoriesService } from '../../services/categories.service';
 
 export default class CategoryFormController {
 
-    constructor($scope, CategoriesService) {
+    constructor($rootScope, $scope, CategoriesService) {
         "ngInject";
         this.categoriesService = CategoriesService;
         this.$scope = $scope;
-        this.mainCategory = {
-            id: null,
-            name: '',
-            children: []
-        }
-        this.subCategory = {
+        this.$rootScope = $rootScope;
+
+        this.category = {
             id: null,
             name: '',
             children: []
         }
         this.options = [];
-        this.chosenOptionId = null;
-        this.idArr = [];
-        this.showSubCatform = false;
+        this.pendingAdd = false;
     }
 
     $onChanges() {
         this.categories = this.categoriesService.getCategories();
-        this.getOptions(this.categories);
         this.$scope.$on('updateCategoriesEvent', (event, data) => {
             this.categories = data;
-            this.options = [];
-            this.getOptions(this.categories);
+        });
+        this.$scope.$on('updateCategoriesEvent', (event, data) => {
+            this.pendingAdd = false;
         });
     }
 
-    getOptions(array) {
-        array.forEach(item => {
-            this.options.push({id: item.id, name: item.name});
-            if(item.children.length > 0) this.getOptions(item.children)
-        })
-    }
 
-    onSubmitCat(form) {
+    onSubmit(form) {
         if(form.$valid) {
-            this.mainCategory.id = this.getId(this.categories, []) + 1;
-            this.categories.push(this.mainCategory);
-            this.mainCategory = {
+            this.categoriesService.newCategory.name = this.category.name;
+            this.categoriesService.addNewCategoryToRoot();
+            this.category = {
                 id: null,
                 name: '',
                 children: []
             }
-        this.categoriesService.saveCategories(this.categories);
         }
     }
 
-    onSubmitSubcat(form) {
-        if(form.$valid) {
-            this.subCategory.id = this.getId(this.categories, []) + 1;
-            this.addSubCat(this.categories, this.subCategory, this.chosenOptionId);
-            this.subCategory = {
+    addToParent() {
+        if(this.category.name) {
+            this.pendingAdd = true;
+            this.$rootScope.$broadcast('pendingAddEvent', this.pendingAdd);
+            this.categoriesService.newCategory.name = this.category.name;
+
+            this.category = {
                 id: null,
                 name: '',
                 children: []
             }
-        this.categoriesService.saveCategories(this.categories);
         }
     }
 
-    addSubCat(arr, obj, id) {
-        this.categoriesService.addObj(arr, obj, id);
+    cancelAddPending() {
+        this.pendingAdd = false;
+        this.$rootScope.$broadcast('pendingAddEvent', this.pendingAdd);
     }
 
-    getId(arr, max) {
-        return this.categoriesService.getMaxId(arr, max);
-    }
-
-    toogleSubCatForm() {
-        this.showSubCatform = !this.showSubCatform;
-    }
 }

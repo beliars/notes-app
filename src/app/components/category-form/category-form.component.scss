@@ -3,11 +3,23 @@ category-form {
     .form-wrapper {
         margin-bottom: 20px;
 
-        select {
+        &:last-child {
+            margin-bottom: 0;
+        }
 
-            option {
-                text-transform: capitalize;
+        form {
+
+            button {
+                margin-bottom: 15px;
             }
+        }
+
+        .alert {
+            margin-top: 15px;
+        }
+
+        .reset {
+            float: right;
         }
     }
 
