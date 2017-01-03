@@ -1,0 +1,53 @@
+<div class="row">
+    <div class="form-wrapper col-xs-12">
+        <h2>Add new note</h2>
+        <form name="form" class="row" ng-submit="$ctrl.onSubmit(form)">
+            <div class="form-group col-xs-12">
+                <label for="note">Enter note name</label>
+                <input type="text" id="note" class="form-control" placeholder="Note name" ng-model="$ctrl.note.name" required>
+            </div>
+
+            <div class="form-group col-xs-12">
+                <label for="note">Enter note text</label>
+                <textarea class="form-control" name="text" rows="4" placeholder="Note text..." ng-model="$ctrl.note.text" required></textarea>
+            </div>
+
+            <div class="colors-list col-xs-12">
+                <h4>Select color</h4>
+                <ul class="list-inline">
+                    <li ng-repeat="color in $ctrl.colors" ng-click="$ctrl.onSelectColor(color)" style="background-color: {{ color }}" ng-class="{'selected-color': color === $ctrl.selectedColor}"></li>
+                </ul>
+            </div>
+
+            <div class="labels-list col-xs-12">
+                <h4>Select priority</h4>
+                <ul class="list-inline">
+                    <li ng-repeat="label in $ctrl.labels" ng-click="$ctrl.onSelectLabel(label)" ng-class="{'selected-label': label === $ctrl.selectedLabel}">{{ label }}</li>
+                </ul>
+            </div>
+
+            <div class="categories-list form-group col-xs-12 row">
+                <h4>Choose category</h4>
+                <div class="available-list col-xs-6">
+                    <h5>Available categories</h5>
+                    <ul class="list-unstyled">
+                        <li ng-repeat="availableCat in $ctrl.availableCats" ng-click="$ctrl.chooseCategory(availableCat)">{{ availableCat.name }}</li>
+                    </ul>
+                </div>
+                <div class="chosen-list col-xs-6" ng-if="$ctrl.note.categories.length">
+                    <h5>Chosen categories</h5>
+                    <ul class="list-unstyled">
+                        <li ng-repeat="chosenCat in $ctrl.note.categories" ng-click="$ctrl.deleteCategory(chosenCat)">{{ chosenCat.name }}</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="form-group col-xs-12">
+                <button type="submit" class="btn btn-default">Save note</button>
+            </div>
+        </form>
+        <div class="alert alert-danger" ng-if="$ctrl.error">
+            <strong>Error!</strong> Select all options.
+        </div>
+    </div>
+</div>

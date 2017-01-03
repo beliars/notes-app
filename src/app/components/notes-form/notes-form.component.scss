@@ -1,0 +1,68 @@
+@mixin shadow {
+    -webkit-box-shadow: 3px 3px 5px 0px rgba(50, 50, 50, 0.67);
+    -moz-box-shadow:    3px 3px 5px 0px rgba(50, 50, 50, 0.67);
+    box-shadow:         3px 3px 5px 0px rgba(50, 50, 50, 0.67);
+}
+
+notes-form {
+
+    .colors-list {
+
+        ul {
+
+            .height-fix {
+                height: 33px;
+            }
+
+            li {
+                display: inline-block;
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                margin-left: 10px;
+                cursor: pointer;
+            }
+
+            .selected-color {
+                @include shadow;
+            }
+        }
+    }
+
+    .labels-list {
+
+
+        ul {
+
+            li {
+                cursor: pointer;
+                line-height: 26px;
+                background-color: #ccc;
+                margin-left: 10px;
+                margin-right: 10px;
+                border-radius: 3px;
+            }
+
+            .selected-label {
+                background-color: darken(#ccc, 20%);
+                @include shadow;
+            }
+        }
+    }
+
+    .categories-list {
+
+        ul {
+
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 10px 25px;
+
+            li {
+                font-size: 20px;
+                cursor: pointer;
+            }
+        }
+
+    }
+}
