@@ -1,3 +1,5 @@
 <div class="container">
-    <h1>Notes Component</h1>
+    <notes-list></notes-list>
+    <button class="btn btn-default" ng-click="$ctrl.onShowNoteForm()">Show/hide Add note form</button>
+    <notes-form ng-if="$ctrl.showNoteForm"></notes-form>
 </div>

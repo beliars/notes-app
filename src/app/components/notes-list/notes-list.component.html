@@ -1,1 +1,19 @@
-<h2>Notes List Component</h2>
+<div class="row">
+    <div class="col-xs-12">
+        <ul class="list-unstyled">
+            <li ng-repeat="note in $ctrl.notes">
+                <div class="note-item" style="background-color: {{ note.color }}">
+                    <p><span>{{ note.id }}.</span> {{ note.name }}</p>
+                    <p>{{ note.text }}</p>
+                    <span class="note-item-label">{{ note.label }}</span>
+                    <div class="note-item-categories">
+                        <ul class="list-unstyled">
+                            <li ng-repeat="category in note.categories">{{ category.name }}</li>
+                        </ul>
+                    </div>
+                </div>
+                <hr>
+            </li>
+        </ul>
+    </div>
+</div>

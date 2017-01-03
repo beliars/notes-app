@@ -1,0 +1,26 @@
+notes-list {
+
+    .note-item {
+        position: relative;
+        padding: 10px 20px;
+        border-radius: 3px;
+
+        .note-item-label {
+            font-weight: bold;
+            position: absolute;
+            top: 5px;
+            right: 5px;
+        }
+
+        .note-item-categories {
+
+            ul {
+                text-align: right;
+
+                li {
+                }
+            }
+
+        }
+    }
+}
