@@ -9,7 +9,7 @@ export default class NotesFormController {
         this.$stateParams = $stateParams;
         this.categoriesService = CategoriesService;
         this.notesService = NotesService;
-        this.availableCats = [];
+        // this.availableCats = [];
         this.error = false;
         this.note = {
             id: null,
@@ -22,20 +22,14 @@ export default class NotesFormController {
     }
 
     $onInit() {
-        if(this.$stateParams.id) {
-            this.note = this.notesService.getNote(this.$stateParams.id);
-        }
         this.categories = this.categoriesService.getCategories();
-        this.getCategoriesList(this.categories);
         this.colors = this.notesService.getColors();
         this.labels = this.notesService.getLabels();
-    }
-
-    getCategoriesList(array) {
-        array.forEach(item => {
-            this.availableCats.push({id: item.id, name: item.name});
-            if(item.children.length > 0) this.getCategoriesList(item.children);
-        });
+        if(this.$stateParams.id) {
+            this.note = this.notesService.getNote(this.$stateParams.id);
+            this.selectedColor = this.note.color;
+            this.selectedLabel = this.note.label;
+        }
     }
 
     choseCategory(category) {
@@ -73,8 +67,6 @@ export default class NotesFormController {
                 label: '',
                 categories: []
             }
-            this.availableCats = [];
-            this.getCategoriesList(this.categories);
             this.selectedLabel = false;
             this.selectedColor = false;
             this.error = false;
