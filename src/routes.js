@@ -14,8 +14,12 @@ function routesConfig($stateProvider, $urlRouterProvider, $locationProvider) {
       url: '/categories',
       component: 'categories'
     })
-  //   .state('detail', {
-  //     url: '/detail/:id',
-  //     component: 'productItem'
-  //   });
+    .state('add', {
+      url: '/add',
+      component: 'notesForm'
+    })
+    .state('edit', {
+      url: '/edit/:id',
+      component: 'notesForm'
+    });
 }
