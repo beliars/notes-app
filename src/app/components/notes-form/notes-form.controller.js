@@ -3,14 +3,14 @@ import { NotesService } from '../../services/notes.service';
 
 export default class NotesFormController {
 
-    constructor(CategoriesService, NotesService) {
+    constructor($state, $stateParams, CategoriesService, NotesService) {
         "ngInject";
+        this.$state = $state;
+        this.$stateParams = $stateParams;
         this.categoriesService = CategoriesService;
         this.notesService = NotesService;
         this.availableCats = [];
         this.error = false;
-        this.labels = ['high', 'medium', 'low'];
-
         this.note = {
             id: null,
             name: '',
@@ -22,10 +22,13 @@ export default class NotesFormController {
     }
 
     $onInit() {
+        if(this.$stateParams.id) {
+            this.note = this.notesService.getNote(this.$stateParams.id);
+        }
         this.categories = this.categoriesService.getCategories();
         this.getCategoriesList(this.categories);
-        this.colors = this.notesService.colors;
-        console.log(this.colors);
+        this.colors = this.notesService.getColors();
+        this.labels = this.notesService.getLabels();
     }
 
     getCategoriesList(array) {
@@ -35,15 +38,11 @@ export default class NotesFormController {
         });
     }
 
-    chooseCategory(category) {
+    choseCategory(category) {
         this.note.categories.push(category);
-        _.remove(this.availableCats, item => {
-            return item.id == category.id;
-        });
     }
 
     deleteCategory(category) {
-        this.availableCats.push(category);
         _.remove(this.note.categories, item => {
             return item.id == category.id;
         });
@@ -79,8 +78,17 @@ export default class NotesFormController {
             this.selectedLabel = false;
             this.selectedColor = false;
             this.error = false;
+            this.$state.go('notes');
         }
         else this.error = true;
     }
 
+    delete(id) {
+        this.notesService.deleteNote(id);
+        this.$state.go('notes');
+    }
+
+    goBack() {
+        this.$state.go('notes');
+    }
 }

@@ -5,6 +5,7 @@ export const CategoryItemComponent = {
     template: require('./category-item.component.html'),
     controller: CategoryItemController,
     bindings: {
-        detail: '<'
+        detail: '<',
+        onChoose: '&' 
     }
 };

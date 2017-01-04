@@ -15,4 +15,8 @@ export default class NotesListController {
             this.notes = data;
         });
     }
+
+    editNote(note) {
+        this.$state.go('edit', {id: note.id});
+    }
 }

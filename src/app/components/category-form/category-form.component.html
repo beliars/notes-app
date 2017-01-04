@@ -7,8 +7,8 @@
                 <input type="text" id="category" name="category" class="form-control" placeholder="Category name" ng-model="$ctrl.category.name" autocomplete="off" required>
             </div>
             <button type="submit" class="btn btn-default">Add to root</button>
+            <button type="button" class="btn btn-default" ng-if="$ctrl.categories.length > 0" ng-click="$ctrl.addToParent()">Add to parent category</button>
         </form>
-        <button class="btn btn-default" ng-if="$ctrl.categories.length > 0" ng-click="$ctrl.addToParent()">Add to parent category</button>
         <div class="alert alert-warning" ng-if="$ctrl.pendingAdd">
             <strong>Info!</strong> Choose the parent category.
         </div>

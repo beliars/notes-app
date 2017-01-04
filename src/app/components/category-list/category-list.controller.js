@@ -4,7 +4,4 @@ export default class CategoryListController {
         "ngInject";
         this.$state = $state;
     }
-
-    $onInit() {
-    }
 }

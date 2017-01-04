@@ -6,6 +6,22 @@
 
 notes-form {
 
+    .text-wrapper {
+        position: relative;
+        border-radius: 3px;
+
+        .form-group:first-child {
+            margin-top: 10px;
+        }
+
+        .note-label {
+            position: absolute;
+            top: 7px;
+            right: 10px;
+            font-weight: bold;
+        }
+    }
+
     .colors-list {
 
         ul {
@@ -52,9 +68,10 @@ notes-form {
 
     .categories-list {
 
+        .disabled {
+            text-decoration: line-through;
+        }
         ul {
-
-            border: 1px solid #ccc;
             border-radius: 5px;
             padding: 10px 25px;
 

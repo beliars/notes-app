@@ -1,5 +1,5 @@
-<li id="{{ $ctrl.detail.id }}">{{$ctrl.detail.name}}
+<li id="{{ $ctrl.detail.id }}" ng-click="$ctrl.onChoose({detail: $ctrl.detail}); $event.stopPropagation()">{{$ctrl.detail.name}}
     <i class="fa fa-plus" aria-hidden="true" title="Add" ng-if="$ctrl.pendingAdd" ng-click="$ctrl.addCat($ctrl.detail)"></i>
     <i class="fa fa-minus" aria-hidden="true" title="Delete" ng-if="$ctrl.pendingDel" ng-click="$ctrl.deleteCat($ctrl.detail)"></i>
 </li>
-<category-list ng-if="$ctrl.detail.children.length > 0" category="$ctrl.detail"></category-list>
+<category-list ng-if="$ctrl.detail.children.length > 0" category="$ctrl.detail" on-choose-item="$ctrl.onChoose({detail})"></category-list>

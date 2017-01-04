@@ -11,6 +11,7 @@ export class NotesService {
             categories: []
         }
         this.colors = ['#2196F3', '#009688', '#CDDC39', '#607D8B'];
+        this.labels = ['high', 'medium', 'low'];
     }
 
     getNotes() {
@@ -21,15 +22,30 @@ export class NotesService {
         else return this.notes;
     }
 
+    getColors() {
+        return this.colors;
+    }
+
+    getLabels() {
+        return this.labels;
+    }
+
     addNewNote(note) {
         this.getNotes();
-        this.newNote.id = this.getMaxId(this.notes) + 1;
         this.newNote.name = note.name;
         this.newNote.text = note.text;
         this.newNote.color = note.color;
         this.newNote.label = note.label;
         this.newNote.categories = note.categories;
-        this.notes.push(this.newNote);
+        if(note.id == null){
+            this.newNote.id = this.getMaxId(this.notes) + 1;
+            this.notes.push(this.newNote);
+        }
+        else {
+            this.newNote.id = note.id;
+            let index = _.findIndex(this.notes, {'id': note.id});
+            this.notes.splice(index, 1, this.newNote);
+        }
         this.saveNotes(this.notes);
         this.newNote = {
             id: null,
@@ -41,7 +57,6 @@ export class NotesService {
     }
 
     getMaxId(arr) {
-        console.log(arr.length);
         if (arr.length) return _.maxBy(arr, 'id').id;
         else return 0;
     }
@@ -51,4 +66,13 @@ export class NotesService {
         this.$rootScope.$broadcast('updateNotesEvent', this.notes);
     }
 
+    getNote(id) {
+        return _.find(this.getNotes(), item => item.id == id);
+    }
+
+    deleteNote(id) {
+        let index = _.findIndex(this.getNotes(), {'id': id});
+        this.notes.splice(index, 1);
+        this.saveNotes(this.notes);
+    }
 }
