@@ -14,6 +14,7 @@ export default class NotesListController {
         this.$scope.$on('updateNotesEvent', (event, data) => {
             this.notes = data;
         });
+        console.log(this.notes);
     }
 
     editNote(note) {

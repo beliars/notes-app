@@ -9,6 +9,7 @@ export default class CategoryItemController {
         this.categoriesService = CategoriesService;
         this.pendingAdd = false;
         this.pendingDel = false;
+        this.selectedDetail = [];
     }
 
     $onInit() {
@@ -22,6 +23,11 @@ export default class CategoryItemController {
             this.pendingAdd = false;
             this.pendingDel = false;
         });
+        if(this.note) {
+            _.each(this.note.categories, (item) => {
+                this.selectedDetail[item.id] = item;
+            });
+        }
     }
 
     deleteCat(detail) {
@@ -34,5 +40,19 @@ export default class CategoryItemController {
     addCat(detail) {
         this.categoriesService.chosenId = detail.id;
         this.categoriesService.addNewCategory();
+    }
+
+    onSelect(detail) {
+        if(this.selectedDetail[detail.id]){
+            if(this.selectedDetail[detail.id].id != detail.id) {
+                this.selectedDetail[detail.id] = detail;
+            }
+            else {
+                this.selectedDetail[detail.id] = false;
+            }
+        }
+        else {
+            this.selectedDetail[detail.id] = detail;
+        }
     }
 }

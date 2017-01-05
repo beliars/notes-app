@@ -6,6 +6,7 @@ export const CategoryListComponent = {
     controller: CategoryListController,
     bindings: {
         category: '<',
+        note: '<',
         onChooseItem: '&'
     }
 };

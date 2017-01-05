@@ -47,7 +47,6 @@ notes-form {
 
     .labels-list {
 
-
         ul {
 
             li {
@@ -71,6 +70,7 @@ notes-form {
         .disabled {
             text-decoration: line-through;
         }
+
         ul {
             border-radius: 5px;
             padding: 10px 25px;
@@ -79,6 +79,14 @@ notes-form {
                 font-size: 20px;
                 cursor: pointer;
             }
+        }
+
+        .selected-category {
+            @include shadow;
+            background-color: #80cbc4;
+            padding: 2px 15px;
+            border-radius: 4px;
+            text-shadow: 2px 2px 10px rgba(89, 102, 108, 1);
         }
 
     }

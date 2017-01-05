@@ -1,8 +1,23 @@
+@mixin shadow {
+    -webkit-box-shadow: 3px 3px 5px 0px rgba(50, 50, 50, 0.67);
+    -moz-box-shadow:    3px 3px 5px 0px rgba(50, 50, 50, 0.67);
+    box-shadow:         3px 3px 5px 0px rgba(50, 50, 50, 0.67);
+}
+
 category-item {
+
+    .selected-detail {
+        @include shadow;
+        background-color: #80cbc4;
+        padding: 2px 15px;
+        border-radius: 4px;
+        text-shadow: 2px 2px 10px rgba(89, 102, 108, 1);
+    }
+
     li {
 
         i {
             cursor: pointer;
+            }
         }
-    }
 }

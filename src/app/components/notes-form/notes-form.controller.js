@@ -9,7 +9,7 @@ export default class NotesFormController {
         this.$stateParams = $stateParams;
         this.categoriesService = CategoriesService;
         this.notesService = NotesService;
-        // this.availableCats = [];
+        this.selectedCategory = [];
         this.error = false;
         this.note = {
             id: null,
@@ -29,11 +29,31 @@ export default class NotesFormController {
             this.note = this.notesService.getNote(this.$stateParams.id);
             this.selectedColor = this.note.color;
             this.selectedLabel = this.note.label;
+            _.each(this.note.categories, (item) => {
+                this.selectedCategory[item.id] = item;
+            });
         }
     }
 
     choseCategory(category) {
-        this.note.categories.push(category);
+        if(this.selectedCategory[category.id]) {
+            if(this.selectedCategory[category.id].id != category.id) {
+                this.selectedCategory[category.id] = category;
+                this.note.categories.push(category);
+            }
+            else {
+                this.selectedCategory[category.id] = false;
+                let position = _.findIndex(this.note.categories, {'id': category.id});
+                this.note.categories.splice(position, 1);
+                _.remove(this.note.categories, item => {
+                    return item.id == category.id;
+                });
+            }
+        }
+        else {
+            this.selectedCategory[category.id] = category;
+            this.note.categories.push(category);
+        }
     }
 
     deleteCategory(category) {
