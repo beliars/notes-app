@@ -3,7 +3,7 @@
         <h2 ng-if="!$ctrl.notes.length">Please add Your first note: <a ui-sref="add">add note</a></h2>
         <ul class="list-unstyled">
             <li ng-repeat="note in $ctrl.notes">
-                <div class="note-item" style="background-color: {{ note.color.bg }}; color: {{ note.color.text }};" ng-click="$ctrl.editNote(note)">
+                <div class="note-item" style="background-color: {{ note.color }}" ng-click="$ctrl.editNote(note)">
                     <p><span>{{ note.id }}.</span> {{ note.name }}</p>
                     <p>{{ note.text }}</p>
                     <span class="note-item-label">{{ note.label }}</span>

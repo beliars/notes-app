@@ -10,7 +10,7 @@ export class NotesService {
             label: '',
             categories: []
         }
-        this.colors = [{bg: '#2196F3', text: '#fff'}, {bg: '#009688', text: '#fff'}, {bg: '#CDDC39', text: '#fff'}, {bg: '#607D8B', text: '#fff'}];
+        this.colors = ['#2196F3', '#009688', '#CDDC39', '#607D8B', '#fff'];
         this.labels = ['high', 'medium', 'low'];
     }
 
