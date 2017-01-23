@@ -6,22 +6,24 @@
 
 categories {
 
-    li {
-        font-size: 16px;
-        margin: 0 20px 15px;
-        text-transform: capitalize;
+    .container {
 
-        i {
-            cursor: pointer;
+        li {
+            font-size: 16px;
+            margin: 0 20px 15px;
+            text-transform: capitalize;
+
+            i {
+                cursor: pointer;
+            }
+        }
+
+        .categories-list {
+            margin-bottom: 20px;
+        }
+
+        .delete {
+            float: right;
         }
     }
-
-    .categories-list {
-        margin-bottom: 20px;
-    }
-
-    .delete {
-        float: right;
-    }
-
 }

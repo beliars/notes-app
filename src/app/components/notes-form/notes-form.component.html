@@ -30,9 +30,9 @@
 
                 <div class="categories-list form-group col-xs-12 row">
                     <h4>Choose category</h4>
-                    <!-- <div class="available-list col-xs-6"> -->
+                        <p ng-if="!$ctrl.categories.length">No categories added, <a ui-sref="categories" href="#!/categories">add at least one category</a></p>
+                        <ul ng-if="$ctrl.categories.length">
                         <h5>Available categories</h5>
-                        <ul>
                             <li id="{{ category.id }}" ng-repeat="category in $ctrl.categories">
                                 <span ng-click="$ctrl.choseCategory(category)" ng-class="{'selected-category': category.id === $ctrl.selectedCategory[category.id].id}">{{ category.name }}</span>
                                 <category-list category="category" note="$ctrl.note" on-choose-item="$ctrl.choseCategory(detail)"></category-list>
